@@ -117,10 +117,22 @@ body {
     background-color: #ffffff;
 }
 
+
 .todoList li {
-    border-bottom: 1px solid #ededed;
     font-size: 24px;
-    position: relative
+    position: relative;
+    align-items: center;
+    border-bottom: 1px solid #ededed;
+}
+
+.todoList li .view {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+}
+
+.view label {
+    color: #484848;
 }
 
 .todoList li:first-child {
@@ -133,21 +145,16 @@ body {
 }
 
 .todoList li .toggle {
-    border: none;
-    bottom: 0;
-    height: auto;
-    margin: auto 0;
     opacity: 0;
+    width: 40px;
+    height: auto;
     position: absolute;
-    text-align: center;
-    top: 0;
-    width: 40px
 }
 
 .todoList li .toggle+label {
-    background-image: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2240%22%20height%3D%2240%22%20viewBox%3D%22-10%20-18%20100%20135%22%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2250%22%20fill%3D%22none%22%20stroke%3D%22%23949494%22%20stroke-width%3D%223%22/%3E%3C/svg%3E");
     background-position: 0;
-    background-repeat: no-repeat
+    background-repeat: no-repeat;
+    background-image: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2240%22%20height%3D%2240%22%20viewBox%3D%22-10%20-18%20100%20135%22%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2250%22%20fill%3D%22none%22%20stroke%3D%22%23949494%22%20stroke-width%3D%223%22/%3E%3C/svg%3E");
 }
 
 .todoList li .toggle:checked+label {
@@ -156,18 +163,17 @@ body {
 
 .todoList li label {
     display: block;
-    padding: 15px 15px 15px 60px;
+    padding: 20px 15px 20px 60px;
 }
 
 .todoList li .destroy {
-    top: 0;
     right: 10px;
     width: 40px;
     height: 40px;
     display: none;
-    margin: auto 0;
     font-size: 30px;
     color: #949494;
+    margin-left: auto;
     position: absolute;
     background-color: transparent;
 }
@@ -179,7 +185,6 @@ body {
 
 .todoList li .destroy:after {
     content: "×";
-    margin: auto 0;
 }
 
 .todoList li:hover .destroy {
@@ -187,11 +192,12 @@ body {
 }
 
 .footer {
-    border-top: 1px solid #e6e6e6;
-    font-size: 15px;
     height: 20px;
+    font-size: 15px;
     padding: 10px 15px;
-    text-align: center
+    text-align: center;
+    border-top: 1px solid #e6e6e6;
+    background-color: #ffffff;
 }
 
 .footer:before {
@@ -248,13 +254,18 @@ body {
     border-color: #ce4646
 }
 
+.clearCompleted {
+    font-size: 15px;
+    background-color: transparent;
+}
+
 .clearCompleted,
-html .clearCompleted:active {
-    cursor: pointer;
+.clearCompleted:active {
     float: right;
+    cursor: pointer;
     line-height: 19px;
     position: relative;
-    text-decoration: none
+    text-decoration: none;
 }
 
 .clearCompleted:hover {
