@@ -63,7 +63,6 @@ body {
     top: -65px;
     width: 45px;
     height: 65px;
-    font-size: 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -77,8 +76,6 @@ body {
     color: #949494;
     content: "❯";
     font-size: 22px;
-    display: inline-block;
-    -webkit-transform: rotate(90deg);
     transform: rotate(90deg)
 }
 

@@ -4,7 +4,7 @@ import styles from "./styles.module.css";
 interface Task {
   id: number;
   title: string;
-  completed: boolean;
+  isDone: boolean;
 }
 
 export default function App() {
@@ -34,7 +34,7 @@ export default function App() {
     const newTask: Task = {
       id: Date.now(),
       title: newTaskTitle,
-      completed: false,
+      isDone: false,
     };
 
     setTasks([...tasks, newTask]);
@@ -48,19 +48,20 @@ export default function App() {
   const toggleTaskCompletion = (taskId: number) => {
     setTasks(
       tasks.map((task) =>
-        task.id === taskId ? { ...task, completed: !task.completed } : task
+        task.id === taskId ? { ...task, isDone: !task.isDone } : task
       )
     );
   };
 
   const toggleAllTasksCompletion = () => {
-    const allCompleted = tasks.every((task) => task.completed);
+    const allisDone = tasks.every((task) => task.isDone);
     const updatedTasks = tasks.map((task) => ({
       ...task,
-      completed: !allCompleted,
+      isDone: !allisDone,
     }));
     setTasks(updatedTasks);
   };
+  console.log(tasks);
 
   return (
     <section className={styles.containerSection}>
@@ -71,7 +72,6 @@ export default function App() {
           <input
             className={styles.checkbox}
             type="checkbox"
-            name="checkbox"
             onClick={toggleAllTasksCompletion}
           />
           <label></label>
@@ -98,7 +98,7 @@ export default function App() {
                   className={styles.toggle}
                   type="checkbox"
                   onClick={() => toggleTaskCompletion(task.id)}
-                  checked={task.completed}
+                  checked={task.isDone}
                 />
 
                 <label>{task.title}</label>
