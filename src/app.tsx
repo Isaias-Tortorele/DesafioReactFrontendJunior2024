@@ -87,7 +87,9 @@ export default function App() {
     }
   };
 
-  console.log(tasks);
+  const clearCompleted = () => {
+    setTasks([]);
+  };
 
   return (
     <section className={styles.containerSection}>
@@ -119,10 +121,7 @@ export default function App() {
         <ul className={styles.todoList}>
           {tasks.map((task) => (
             <li key={task.id} className={task.isDone ? styles.completed : ""}>
-              <div
-                className={styles.view}
-                onDoubleClick={() => handleDoubleClick(task.id, task.title)}
-              >
+              <div className={styles.view}>
                 <input
                   className={styles.toggle}
                   type="checkbox"
@@ -140,7 +139,11 @@ export default function App() {
                     onKeyDown={(element) => handleEditKeyDown(element, task.id)}
                   />
                 ) : (
-                  <label>{task.title}</label>
+                  <label
+                    onDoubleClick={() => handleDoubleClick(task.id, task.title)}
+                  >
+                    {task.title}
+                  </label>
                 )}
 
                 <button
@@ -166,7 +169,12 @@ export default function App() {
             <a href="#">Completed</a>
           </li>
         </ul>
-        <button className={styles.clearCompleted}>Clear completed</button>
+        <button
+          className={styles.clearCompleted}
+          onClick={() => clearCompleted()}
+        >
+          Clear completed
+        </button>
       </footer>
     </section>
   );
