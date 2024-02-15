@@ -10,6 +10,8 @@ interface Task {
 export default function App() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [newTaskTitle, setNewTaskTitle] = useState("");
+  const [editingTaskId, setEditingTaskId] = useState<number | null>(null);
+  const [editingTaskTitle, setEditingTaskTitle] = useState("");
 
   useEffect(() => {
     fetchTasks();
@@ -37,7 +39,7 @@ export default function App() {
       isDone: false,
     };
 
-    setTasks([...tasks, newTask]);
+    setTasks([newTask, ...tasks]);
     setNewTaskTitle("");
   };
 
@@ -61,6 +63,30 @@ export default function App() {
     }));
     setTasks(updatedTasks);
   };
+
+  const handleDoubleClick = (taskId: number, title: string) => {
+    setEditingTaskId(taskId);
+    setEditingTaskTitle(title);
+  };
+
+  const handleEditChange = (element: React.ChangeEvent<HTMLInputElement>) => {
+    setEditingTaskTitle(element.target.value);
+  };
+
+  const handleEditKeyDown = (
+    element: React.KeyboardEvent<HTMLInputElement>,
+    taskId: number
+  ) => {
+    if (element.key === "Enter") {
+      setTasks(
+        tasks.map((task) =>
+          task.id === taskId ? { ...task, title: editingTaskTitle } : task
+        )
+      );
+      setEditingTaskId(null);
+    }
+  };
+
   console.log(tasks);
 
   return (
@@ -84,7 +110,7 @@ export default function App() {
             placeholder="What needs to be done?"
             value={newTaskTitle}
             onChange={(event) => setNewTaskTitle(event.target.value)}
-            onKeyDown={(e) => e.key === "Enter" && addTask()}
+            onKeyDown={(element) => element.key === "Enter" && addTask()}
           />
         </div>
       </div>
@@ -92,8 +118,11 @@ export default function App() {
       <main className={styles.main}>
         <ul className={styles.todoList}>
           {tasks.map((task) => (
-            <li key={task.id}>
-              <div className={styles.view}>
+            <li key={task.id} className={task.isDone ? styles.completed : ""}>
+              <div
+                className={styles.view}
+                onDoubleClick={() => handleDoubleClick(task.id, task.title)}
+              >
                 <input
                   className={styles.toggle}
                   type="checkbox"
@@ -101,7 +130,19 @@ export default function App() {
                   checked={task.isDone}
                 />
 
-                <label>{task.title}</label>
+                {editingTaskId === task.id ? (
+                  <input
+                    className={styles.edit}
+                    type="text"
+                    value={editingTaskTitle}
+                    onChange={handleEditChange}
+                    onBlur={() => setEditingTaskId(null)}
+                    onKeyDown={(element) => handleEditKeyDown(element, task.id)}
+                  />
+                ) : (
+                  <label>{task.title}</label>
+                )}
+
                 <button
                   className={styles.destroy}
                   onClick={() => removeTask(task.id)}

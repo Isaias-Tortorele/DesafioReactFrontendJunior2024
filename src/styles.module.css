@@ -123,7 +123,7 @@ body {
 }
 
 .todoList li .view {
-    flex-grow: 1;
+    /* flex-grow: 1; */
     display: flex;
     align-items: center;
 }
@@ -175,6 +175,20 @@ body {
     background-color: transparent;
 }
 
+.todoList li .edit {
+    width: 100%;
+    color: #111;
+    border: none;
+    outline: 0;
+    font-size: 24px;
+    padding: 20px 15px 20px 60px;
+}
+
+.edit:focus {
+    outline: none;
+    box-shadow: 0 -1px 5px 1px rgba(187, 54, 61, 0.750);
+}
+
 .todoList li .destroy:focus,
 .todoList li .destroy:hover {
     color: #c18585
@@ -186,6 +200,11 @@ body {
 
 .todoList li:hover .destroy {
     display: block
+}
+
+.todoList li input[type="checkbox"]:checked+label {
+    color: #949494;
+    text-decoration: line-through;
 }
 
 .footer {
