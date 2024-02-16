@@ -20,7 +20,7 @@ export default function App() {
     fetchTasks();
   }, []);
 
-  const fetchTasks = async () => {
+  async function fetchTasks() {
     try {
       const response = await fetch(
         "https://my-json-server.typicode.com/EnkiGroup/DesafioReactFrontendJunior2024/todos"
@@ -31,9 +31,9 @@ export default function App() {
     } catch (error) {
       console.error("Erro ao recuperar as tarefas:", error);
     }
-  };
+  }
 
-  const addTask = () => {
+  function addTask() {
     if (newTaskTitle === "") return;
 
     const newTask: Task = {
@@ -44,47 +44,47 @@ export default function App() {
 
     setTasks([newTask, ...tasks]);
     setNewTaskTitle("");
-  };
+  }
 
-  const removeTask = (taskId: number) => {
+  function removeTask(taskId: number) {
     setTasks(tasks.filter((task) => task.id !== taskId));
-  };
+  }
 
-  const toggleTaskCompletion = (taskId: number) => {
+  function toggleTask(taskId: number) {
     setTasks(
       tasks.map((task) =>
         task.id === taskId ? { ...task, isDone: !task.isDone } : task
       )
     );
-  };
+  }
 
-  const toggleAllTasksCompletion = () => {
-    const allisDone = tasks.every((task) => task.isDone);
+  function toggleAllTasks() {
+    const allIsDone = tasks.every((task) => task.isDone);
 
     const updatedTasks = tasks.map((task) => ({
       ...task,
-      isDone: !allisDone,
+      isDone: !allIsDone,
     }));
     setTasks(updatedTasks);
-  };
+  }
 
-  const countTasks = () => {
+  function countTasks() {
     return tasks.filter((task) => !task.isDone).length;
-  };
+  }
 
-  const handleDoubleClick = (taskId: number, title: string) => {
+  function handleDoubleClick(taskId: number, title: string) {
     setEditingTaskId(taskId);
     setEditingTaskTitle(title);
-  };
+  }
 
-  const handleEditChange = (element: React.ChangeEvent<HTMLInputElement>) => {
+  function handleEditChange(element: React.ChangeEvent<HTMLInputElement>) {
     setEditingTaskTitle(element.target.value);
-  };
+  }
 
-  const handleEditKeyDown = (
+  function handleEditKeyboard(
     element: React.KeyboardEvent<HTMLInputElement>,
     taskId: number
-  ) => {
+  ) {
     if (element.key === "Enter") {
       setTasks(
         tasks.map((task) =>
@@ -93,15 +93,15 @@ export default function App() {
       );
       setEditingTaskId(null);
     }
-  };
+  }
 
-  const clearCompleted = () => {
+  function clearCompleted() {
     setTasks(tasks.filter((task) => !task.isDone));
-  };
+  }
 
-  const changeFilter = (selectedFilter: string) => {
+  function changeFilter(selectedFilter: string) {
     setFilter(selectedFilter);
-  };
+  }
 
   return (
     <Router>
@@ -113,11 +113,9 @@ export default function App() {
             <input
               className={styles.checkbox}
               type="checkbox"
-              onClick={toggleAllTasksCompletion}
+              onClick={toggleAllTasks}
             />
-            {tasks.length !== 0 && (
-              <label onClick={toggleAllTasksCompletion}></label>
-            )}
+            {tasks.length !== 0 && <label onClick={toggleAllTasks}></label>}
           </div>
 
           <div>
@@ -153,7 +151,7 @@ export default function App() {
                     <input
                       className={styles.toggle}
                       type="checkbox"
-                      onChange={() => toggleTaskCompletion(task.id)}
+                      onChange={() => toggleTask(task.id)}
                       checked={task.isDone}
                     />
 
@@ -165,7 +163,7 @@ export default function App() {
                         onChange={handleEditChange}
                         onBlur={() => setEditingTaskId(null)}
                         onKeyDown={(element) =>
-                          handleEditKeyDown(element, task.id)
+                          handleEditKeyboard(element, task.id)
                         }
                       />
                     ) : (
