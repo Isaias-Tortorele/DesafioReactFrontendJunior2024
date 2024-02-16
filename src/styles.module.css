@@ -46,40 +46,39 @@ body {
     flex: 1;
     z-index: 2;
     position: absolute;
-
 }
 
 .checkbox {
     opacity: 0;
-    border: none;
     position: absolute;
-    height: 60px !important;
     right: auto !important;
-    width: 40px !important;
+    height: 100% !important;
+    width: 100% !important;
 }
 
 .checkbox+label {
-    left: 0;
     top: -65px;
     width: 45px;
     height: 65px;
     display: flex;
     align-items: center;
     justify-content: center;
+
 }
 
 .checkbox:checked+label:before {
-    color: #b83f45
+    color: #0c0c0c
 }
 
 .checkbox+label:before {
     color: #949494;
     content: "❯";
     font-size: 22px;
-    transform: rotate(90deg)
+    transform: rotate(90deg);
 }
 
-.checkbox:focus {
+
+.checkbox:focus:checked+label {
     outline: 0;
     box-shadow: 0 0 2px 2px #cf7d7d;
 }
@@ -100,8 +99,8 @@ body {
 }
 
 .input:focus {
-    box-shadow: 0 -1px 5px 1px rgba(187, 54, 61, 0.750);
     outline: none;
+    box-shadow: 0 -1px 5px 1px rgba(187, 54, 61, 0.750);
 }
 
 .input::placeholder {
@@ -136,7 +135,6 @@ body {
     border-top: 1px solid #ededed;
 }
 
-
 .todoList li:last-child {
     border-bottom: none
 }
@@ -144,7 +142,7 @@ body {
 .todoList li .toggle {
     opacity: 0;
     width: 40px;
-    height: auto;
+    height: 30px;
     position: absolute;
 }
 
@@ -161,6 +159,8 @@ body {
 .todoList li label {
     display: block;
     padding: 20px 15px 20px 60px;
+    word-break: break-all;
+
 }
 
 .todoList li .destroy {
@@ -200,11 +200,6 @@ body {
 
 .todoList li:hover .destroy {
     display: block
-}
-
-.todoList li input[type="checkbox"]:checked+label {
-    color: #949494;
-    text-decoration: line-through;
 }
 
 .footer {
@@ -266,7 +261,7 @@ body {
     border-color: #db7676
 }
 
-.filters li a.selected {
+.filters li .selected {
     border-color: #ce4646
 }
 
