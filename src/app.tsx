@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Link } from "react-router-dom";
 
 import styles from "./styles.module.css";
 
@@ -108,7 +108,7 @@ export default function App() {
       <section className={styles.containerSection}>
         <h1>todos</h1>
 
-        <div className={styles.containerSearch}>
+        <div>
           <div className={styles.containerCheckbox}>
             <input
               className={styles.checkbox}
@@ -120,7 +120,7 @@ export default function App() {
             )}
           </div>
 
-          <div className={styles.containerInput}>
+          <div>
             <input
               className={styles.input}
               type="text"
@@ -229,6 +229,12 @@ export default function App() {
           </footer>
         )}
       </section>
+
+      <div className={styles.info}>
+        <p>Double-click to edit a todo</p>
+        <p>Created by the TodoMVC Team</p>
+        <p>Part of TodoMVC</p>
+      </div>
     </Router>
   );
 }
