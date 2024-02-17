@@ -12,8 +12,10 @@ interface Task {
 export default function App() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [newTaskTitle, setNewTaskTitle] = useState("");
+
   const [editingTaskId, setEditingTaskId] = useState<number | null>(null);
   const [editingTaskTitle, setEditingTaskTitle] = useState("");
+
   const [filter, setFilter] = useState("all");
 
   useEffect(() => {
