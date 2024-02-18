@@ -17,8 +17,7 @@ O foco deste teste é a implementação de uma lista de tarefas, onde você deve
 1. Faça o fork do nosso repositório no Github.
 2. Clone do projeto.
 3. Instale as dependências do projeto (utilizando o `yarn` ou `npm install`).
-4. No arquivo `src/app.tsx` você irá encontrar o esqueleto dessa aplicação, este é seu ponto de partida.
-5. Utilize `yarn start` ou `npm start` para inicializar a aplicação.
+4. Utilize `yarn start` ou `npm start` para inicializar a aplicação.
 
 ## O que fazer?
 
